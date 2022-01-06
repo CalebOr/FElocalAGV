@@ -1,0 +1,108 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-agvs-dev-161617-authRole",
+      "UnauthRoleArn": "arn:aws:iam::939147167084:role/amplify-agvs-dev-161617-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::939147167084:role/amplify-agvs-dev-161617-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-agvs-dev-161617-deployment",
+      "UnauthRoleName": "amplify-agvs-dev-161617-unauthRole",
+      "StackName": "amplify-agvs-dev-161617",
+      "StackId": "arn:aws:cloudformation:us-east-1:939147167084:stack/amplify-agvs-dev-161617/f4102350-68f4-11ec-abd4-12db6a1ac8c3",
+      "AmplifyAppId": "d2nstnvx1dantq"
+    }
+  },
+  "auth": {
+    "agvs2d89d57f": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "signupAttributes": [],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-agvs-dev-161617-deployment/amplify-cfn-templates/auth/agvs2d89d57f-cloudformation-template.json",
+        "logicalId": "authagvs2d89d57f"
+      },
+      "lastPushTimeStamp": "2022-01-06T17:38:22.370Z",
+      "output": {
+        "UserPoolId": "us-east-1_3toAcRzN8",
+        "AppClientIDWeb": "4je07cnq9f9pk5iaal9icp8cdg",
+        "AppClientID": "33tpe3aesg6faertj1hm5h7bt",
+        "IdentityPoolId": "us-east-1:44311431-e026-455d-a929-6d8a387b3aa1",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:939147167084:userpool/us-east-1_3toAcRzN8",
+        "IdentityPoolName": "agvs2d89d57f_identitypool_2d89d57f__dev",
+        "UserPoolName": "agvs2d89d57f_userpool_2d89d57f"
+      },
+      "lastPushDirHash": "Noemk4Be+EZx7QkjltOodUlvCn0="
+    }
+  },
+  "function": {
+    "agvapi2": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "output": {
+        "Region": "us-east-1",
+        "Arn": "arn:aws:lambda:us-east-1:939147167084:function:agvapi2-dev",
+        "Name": "agvapi2-dev",
+        "LambdaExecutionRole": "agvsLambdaRole5cf528bc-dev"
+      },
+      "lastPushTimeStamp": "2022-01-06T17:38:22.345Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-agvs-dev-161617-deployment/amplify-cfn-templates/function/agvapi2-cloudformation-template.json",
+        "logicalId": "functionagvapi2"
+      },
+      "lastBuildTimeStamp": "2022-01-04T22:22:58.050Z",
+      "lastBuildType": "PROD",
+      "lastPackageTimeStamp": "2022-01-04T22:22:59.445Z",
+      "distZipFilename": "agvapi2-725a6f4d51704d4f3930-build.zip",
+      "s3Bucket": {
+        "deploymentBucketName": "amplify-agvs-dev-161617-deployment",
+        "s3Key": "amplify-builds/agvapi2-725a6f4d51704d4f3930-build.zip"
+      },
+      "lastPushDirHash": "rZoMQpMO90NJB3L2CCOGOFywfKc="
+    }
+  },
+  "api": {
+    "agvapi2": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "agvapi2",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "output": {
+        "ApiName": "agvapi2",
+        "RootUrl": "https://fqz0dnlgae.execute-api.us-east-1.amazonaws.com/dev",
+        "ApiId": "fqz0dnlgae"
+      },
+      "lastPushTimeStamp": "2022-01-06T17:38:22.347Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-agvs-dev-161617-deployment/amplify-cfn-templates/api/agvapi2-cloudformation-template.json",
+        "logicalId": "apiagvapi2"
+      },
+      "lastPushDirHash": "dYG+Hdw7+JFdym+D/+hQBaVYwO0="
+    }
+  }
+}
