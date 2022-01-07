@@ -1,7 +1,7 @@
-import PersonAddIcon from '@material-ui/icons/PersonAdd';
-import GraphicEqIcon from '@material-ui/icons/GraphicEq';
-import TuneIcon from '@material-ui/icons/Tune';
-import ListAltIcon from '@material-ui/icons/ListAlt';
+import PersonAddIcon from '@material-ui/icons/ViewCarousel';
+import Map from '@material-ui/icons/MapOutlined'
+import TuneIcon from '@material-ui/icons/AssessmentOutlined';
+import ListAltIcon from '@material-ui/icons/Assignment';
 import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
@@ -22,15 +22,13 @@ function ResponsiveDrawer(props) {
  const renderSwitch=(param)=> {
     switch(param) {
       case 0:
-        return <GraphicEqIcon className="icon__SideBar " style={{color:"white"}}/>;
+        return <Map className="icon__SideBar " style={{color:"white"}}/>;
       case 1:
         return <ListAltIcon className="icon__SideBar" style={{color:"white"}}/>;
       case 2:
         return <PersonAddIcon className="icon__SideBar" style={{color:"white"}}/>;
       case 3:
         return <TuneIcon className="icon__SideBar" style={{color:"white"}}/>;
-      case 4:
-        return <ListAltIcon className="icon__SideBar" style={{color:"white"}}/>;
       default:
         return null
     }

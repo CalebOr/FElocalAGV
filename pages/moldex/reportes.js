@@ -1,7 +1,7 @@
 const Reportes = () => (
-    <div>
-      <h1>Home page</h1>
-    </div>
+    <Layout>
+        hola
+    </Layout>
   )
   
   export default Reportes
