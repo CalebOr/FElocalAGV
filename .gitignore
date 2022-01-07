@@ -80,3 +80,4 @@ amplify/.config/project-config.json
 .DS_Store
 .next/server/pages/_app.js
 .next/server/pages/_document.js
+.next/*
