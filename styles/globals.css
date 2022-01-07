@@ -1,16 +1,69 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@tailwind variants;
+@layer components{
+    .button-general{
+        @apply border-[2px] border-[red] p-5 cursor-pointer rounded-lg;
+        background-color: pink;
+    }
+    .topbar{
+        /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
+        background-color: whitesmoke;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        height: 8vh;
+    }
+    .sideBar2{
+        @apply h-[92vh] w-[15vw] grid justify-items-stretch ;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        
+    }
+    .sideOptions{
+        @apply  cursor-pointer h-[12%] w-[100%] flex flex-wrap content-center pl-[10%];
+    }
+    .content{
+        @apply bg-[whitesmoke] h-[100%] w-[100];
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+    }
+    .table{
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
 
-* {
-  box-sizing: border-box;
+    .logo-container{
+        height: 5vh;
+        max-width: 200px;
+    }
+    .custom-box{
+        @apply bg-white dark:bg-[#222b36] p-5 rounded-lg gap-4;
+        box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    }
+    .main-content{
+        @apply w-[100%] h-[92vh] relative p-10 gap-10 overflow-scroll;
+    }
+    .search-bar{
+        transition: width 600ms ease;
+    }
+    .filter-button{
+        @apply h-10 border-[2px] rounded-lg flex items-center gap-2 justify-center p-2 w-[120px];
+    }
+    .custom-button{
+        @apply text-white flex items-center justify-center gap-1 rounded-lg p-2 border-2; 
+    }
+    .button-color-1{
+        @apply bg-[#00897b] border-[#00352cbb] hover:bg-[#01665c];
+    }
+    .button-color-2{
+        @apply bg-[#0694A1] border-[#0a5258] hover:bg-[#309ea8];
+    }
+    .hide-scroll{
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .hide-scroll::-webkit-scrollbar {
+        display: none;
+    }
+    .text-colors{
+        @apply text-black dark:text-white;
+    }
 }
