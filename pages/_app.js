@@ -13,7 +13,7 @@ const progress = new ProgressBar({
   className: 'z-50',
   delay: 100
 })
-Amplify.configure({...awsExports, ssr: true});
+Amplify.configure({...awsExports, ssr: true, region: 'us-east-1'});
 
 Router.events.on('routeChangeStart', progress.start);
 Router.events.on('routeChangeComplete', progress.finish)

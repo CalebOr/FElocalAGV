@@ -22,6 +22,8 @@ const awsmobile = {
     "aws_cognito_verification_mechanisms": [
         "EMAIL"
     ],
+    "aws_user_files_s3_bucket": "agvs3a19408249b974b2e834b13afab690c62102429-dev",
+    "aws_user_files_s3_bucket_region": "us-east-1",
     "aws_cloud_logic_custom": [
         {
             "name": "agvapi2",

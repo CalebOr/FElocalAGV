@@ -1,0 +1,18 @@
+{
+  "resourceName": "agvs",
+  "policyUUID": "a5e3aa78",
+  "bucketName": "agvs3a19408249b974b2e834b13afab690c62",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "S3Trigger3a08108f",
+  "groupAccess": {}
+}
