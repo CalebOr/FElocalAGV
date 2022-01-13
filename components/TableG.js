@@ -10,32 +10,12 @@ import {useState, useEffect} from 'react'
 import {TiEdit, TiDeleteOutline} from 'react-icons/ti'
 import { useFilters, useSortBy, useTable } from 'react-table';
 
-const columns = [
-    { id: 'item', label:'ITEM', minWidth: 120 },
-    { id: 'product', label: 'Producto', minWidth: 120 },
-    { id: 'time', label: 'Tiempo de producción individual', minWidth: 120 },
-    { id: 'people', label: 'Personas necesarias', minWidth: 120 },
-    { id: 'line', label: 'Linea', minWidth: 100 },
-    { id: 'tamanio', label: 'Tamaño', minWidth: 100 },
-    { id: 'noAccesorios', label: 'Cantidad de Accesorios extra', minWidth: 100 },
-    { id: 'actions', label: 'Acciones', minWidth: 100}
-];
-const data=[
-    {item:'uno', product:'1', time:'1 hr', people:'1', line:'1', tamanio:'1', noAccesorios:'1'},
-    {item:'dos', product:'2', time:'2 hr', people:'2', line:'2', tamanio:'2', noAccesorios:'2'}
-]
-function TableG({token}) {
-
+function TableG({token, data, columns,filter, aux}) {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(50);
-    const [modal, setModal] =useState(false)
-    const [modal2, setModal2] =useState(false)
-    const [estandar, setEstandar]=useState('')
-    const [name, setName]=useState('')
-    const [line, setLine]=useState('')
-    const [searchedData, setSearchedDate] = useState([])
     const [colors, setColors] = useState(['#222b36', 'whitesmoke'])
     const [filterInput, setFilterInput] = useState("");
+    const [name, setName] = useState([])
     const {
         getTableProps,
         getTableBodyProps,
@@ -64,39 +44,80 @@ function TableG({token}) {
         setRowsPerPage(+event.target.value);
         setPage(0);
     }
-    const handleFilterChange = e => {
-        const value = e.target.value || undefined;
+    
+    async function handleFilterChange(e) {
+        let value = e || undefined
         console.log(value)
-        setFilter("item", value);
-        console.log(setFilter)
-        setFilterInput(value);
-
+        setFilterInput(value)
+        setFilter(filter, value);
       };
-
-    useEffect(() => {
-        
+    useEffect(() => {  
+        // const requestOptions = {
+        //     method: 'POST',
+        //     headers: { 'Authorization': 'eyJraWQiOiJBSlpUVjNGOEpaS003dVIwcXk4ZFwvaXFvRVQzQlwvQ3VMT1dHaVoxN0U0NlU9IiwiYWxnIjoiUlMyNTYifQ.eyJvcmlnaW5fanRpIjoiMWJjOWFiODctMGQwMy00MDQ5LTlhNWQtYzIwNTJmOGJhYTE0Iiwic3ViIjoiMzlhYTdiOGItM2Y1Yy00NWMyLTljMzItNmU2OTZlOTdmZmJiIiwiYXVkIjoiMWJjcjdrYjRuNWFnYmFwcXNia3RpYWY4aHEiLCJldmVudF9pZCI6ImM4MWE3NzIwLWJiZTYtNDhhMC1hNzg0LWRlYzBkZDBmZGUzNyIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNjQyMDAzMTk0LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9RTVh0M3ZDN3EiLCJjb2duaXRvOnVzZXJuYW1lIjoiMTAxMDg0MDYiLCJleHAiOjE2NDIwMDY3OTMsImlhdCI6MTY0MjAwMzE5NCwianRpIjoiZTBlMGE1MzAtMjk0Ni00ZjE2LTgzOTctZGFjMjI2ZDM2NzdkIn0.Y8elg9GttFot4fqbkyf1u-TxTYw5s7YikR803vk3TtCa6yeg7IB0iEz74USi02mJouQTA_2aDiou1hQ1YDR2nQx82rthbtTnE210QA_8WWedYQrEpc2AisS9PztmVmnUMSeNRQlBsLzjm2v7qJW-aMFX0lWXhbA9mQlDMTrFHT5DMoyfXPX__oTXrbJLT6HZl4SoEbGkACh03yg-mWB44-BNM9NG5SIdK2kROqThA63oeepz5kCv0jajEdMWUi6wBEblCj33jSngFd01ZMqBCMbUClWgBbjpyJb9KoR65_507KEdvdsSz2FKzSI4qoiz0nqbS2BAiXoFogIeKKqNaQ' },
+        //     body: JSON.stringify({ "thing":"M5GPS" })
+        // };  
+        //  fetch('https://intxgh6og0.execute-api.us-east-1.amazonaws.com/servs/leer', requestOptions)
+        // .then(res => res.json()) 
+        // .then(res => setName(res));
     }, [])
+
     return (
-        <Paper sx={{ width: '100%', overflow: 'hidden', color: colors[1]}}>
+        <div>
             <input
+                style={{color:'black'}}
                 Value={filterInput}
-                onChange={handleFilterChange}
-                placeholder={"Search name"}
+                onChange={(e) => handleFilterChange(e.target.value)}
+                placeholder={"Buscar fecha"}
             />
-            <br/>
+            <br/><br/>
+            <Paper sx={{ width: '100%', overflow: 'hidden', color: 'whitesmoke'}}>
             <TableContainer sx={{ maxHeight: 800 }}>
                 <table {...getTableProps()}>
                     <thead>
                         {headerGroups.map(headerGroup => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map(column => (
-                            <th {...column.getHeaderProps()}>{column.render("label")}</th>
+                            <th {...column.getHeaderProps()}   
+                                style={{ minWidth: column.minWidth, background:'#5CBC99', color:'white', fontFamily:'sans-serif', fontSize:'14px',height:50 }}>
+                                {column.render("Header")}</th>
                             ))}
+                            {/* {()=>{
+                                if (aux==1){
+                                    return  */}
+                                    <th   
+                                    style={{ minWidth: 170, background:'#5CBC99', color:'white', fontFamily:'sans-serif', fontSize:'14px',height:50 }}>
+                                    ACCIONES </th>
+                            {/*      }
+                             }} */}
                         </tr>
                         ))}
                     </thead>
-                    <tbody>
-                                
+                    <tbody {...getTableBodyProps()}>
+                            {rows.map((row, i) => {
+                            prepareRow(row);
+                            console.log(row.cells[0].value)
+                            return (
+                                <tr {...row.getRowProps()} id={i}
+                                style={{color:'black', background:'whitesmoke'}}>
+                                    {row.cells.map(cell => {
+                                            return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;  
+                                    })}
+                                    <td>
+                                        <div className='flex items-center gap-2'>
+                                            <div className='text-red-400 dark:text-white text-3xl dark:hover:text-red-400 cursor-pointer'>
+                                                <TiDeleteOutline/>
+                                                {/* {row.cells[0].value} */}
+                                            </div>
+
+                                            <div className='text-blue-400 dark:text-white text-3xl dark:hover:text-blue-400 cursor-pointer'>
+                                                <TiEdit/>
+                                            </div>
+                                        </div>
+                                    </td> 
+                                </tr>
+                            );
+                        })}
                     </tbody>
                 </table>
             </TableContainer>
@@ -108,9 +129,11 @@ function TableG({token}) {
                 page={page}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
-                sx={{bgcolor: colors[0],color: colors[1]}}
+                sx={{bgcolor: 'white',color: 'black', width: '100%'}}
             />
             </Paper>
+        </div>
+        
     )
 }
 

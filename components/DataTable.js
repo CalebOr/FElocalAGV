@@ -10,7 +10,7 @@ function DataTable ({data2,token, columns2}){
           {
             label: 'Name',
             field: 'name',
-            width: 150,
+            minWidth: 250,
             attributes: {
               'aria-controls': 'DataTable',
               'aria-label': 'Name',
@@ -102,8 +102,6 @@ function DataTable ({data2,token, columns2}){
             <MDBDataTableV5 className="bg-[#5858a3] w-[80vw] h-[80vh]"
                 responsiveXl
                 bordered
-                autoWidth={true}
-                maxHeight="1000px"
                 hover entriesOptions={[50, 100, 150]} 
                 entries={50} 
                 pagesAmount={4} 

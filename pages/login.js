@@ -17,9 +17,17 @@ function login(token) {
     const [name, setName] =useState([])
     const [loading, setLoading] = useState(false)
     useEffect(()=>{
-        fetch('https://pokeapi.co/api/v2/pokemon/ditto') 
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Authorization': 'eyJraWQiOiJBSlpUVjNGOEpaS003dVIwcXk4ZFwvaXFvRVQzQlwvQ3VMT1dHaVoxN0U0NlU9IiwiYWxnIjoiUlMyNTYifQ.eyJvcmlnaW5fanRpIjoiZWNmNTk1NTQtMDA5MS00Mjk1LTg5YWUtZTQ1OWIxNzk5ZWIxIiwic3ViIjoiMzlhYTdiOGItM2Y1Yy00NWMyLTljMzItNmU2OTZlOTdmZmJiIiwiYXVkIjoiMWJjcjdrYjRuNWFnYmFwcXNia3RpYWY4aHEiLCJldmVudF9pZCI6ImFlNmRiYjJiLTRkODItNDUyOS05YTgwLWI3MWY0NGU5M2FkNiIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNjQyMDkyNTk3LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9RTVh0M3ZDN3EiLCJjb2duaXRvOnVzZXJuYW1lIjoiMTAxMDg0MDYiLCJleHAiOjE2NDIwOTYxOTcsImlhdCI6MTY0MjA5MjU5NywianRpIjoiOWI2NTYzOGUtMzBiMy00NTlmLWE4MjEtZGQ2OWU5MDIxNDcyIn0.YKL0U1-nv3OAruIqBinHN9uAxNegr5St87z_ZebmfJRXzrLFvghEr-1hdi9hOUYiOOmt1jca2yIFxzqQpSpiLFkb5mBEt1dxEEqMQslt5k-JEzEG7whKc8cl94SQlYjIECc7Z0_gffrg48MQagIRKFHTF3OKse8kd6kdT5bauXVS54gVBDk-ix5GaUJOq0nUHyqn2UzK4QCVf0rVyq2V-F0uGtpgTqwpGVo1UQ6E4StBL_FQNl6BXmdTiGzdzIsCYwu8MX-HWIMO9frDQ8hDQh9BbYdYREWGRmTqcuj4TeDF_0-cDNKU_YFUw-JtwQcAkX07VssMl2PK0Zl5bgEaHg' },
+            body: JSON.stringify({ "thing":"M5GPS" })
+        };  
+         fetch('https://intxgh6og0.execute-api.us-east-1.amazonaws.com/servs/leer', requestOptions)
         .then(res => res.json()) 
         .then(res => setName(res));
+        // fetch('https://pokeapi.co/api/v2/pokemon/ditto') 
+        // .then(res => res.json()) 
+        // .then(res => setName(res));
     }, []);
 
   
@@ -31,11 +39,7 @@ function login(token) {
             console.log(response.username)
             setEmpleado(response.data)
             if(response.challengeName === 'NEW_PASSWORD_REQUIRED'){
-                console.log(name)
                 router.push('/register')
-                // const res= await fetch(`https://thoqr5uj6l.execute-api.us-east-1.amazonaws.com/test/pets`)
-                // const data= await res.json()
-                // console.log(data)
             }else{
                 console.log('Repaso para mi login: ',user, pass,response.signInUserSession.idToken.jwtToken)
                 Swal.fire({
@@ -44,6 +48,8 @@ function login(token) {
                     showConfirmButton: false,
                     timer: 1500
                   })
+                  console.log(name)
+
                 // API.post('smpmoldexapi', '/user', {body:{action : 'userFind', idempleado: user }, headers:{Authorization: response.signInUserSession.idToken.jwtToken}})
                 // .then(response2=>{
                 //     if(response2.status === 200){
@@ -77,7 +83,6 @@ function login(token) {
                 showConfirmButton: false,
                 timer: 2000
               })
-            //setAlert({severity: 'error', title: 'Error al iniciar sesión', message: error.message, messageStrong: 'Credenciales erroneas', isOpen: true})
         })
     }
     return (
