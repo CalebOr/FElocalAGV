@@ -113,18 +113,6 @@ function Topbar(props) {
             <Tooltip title='User' > 
                 <label>{userName}</label>
             </Tooltip>
-            <Tooltip title='Color de tema'> 
-                <IconButton onClick={()=>{
-                    if(dark)
-                        setTheme('ligth')
-                    else
-                        setTheme('dark')
-                }}>
-                    {
-                        (dark ? (<Brightness7Icon style={{ color: '#ffeb3b' }} />) :(<Brightness2Icon style={{color: '#2c387e'}} />))
-                    }
-                </IconButton>
-            </Tooltip>
             <Tooltip title='Notificaciones'> 
                 <IconButton>
                     <NotificationsIcon style={{ color: (dark ? '#fff' : '#2c387e') }}/>
@@ -132,8 +120,8 @@ function Topbar(props) {
             </Tooltip>
             <Tooltip title='Usuario'> 
                 <IconButton onClick={()=>setUserMenu(!userMenu)}>
-                    <Avatar alt="Remy Sharp"  className={classes.pink}>
-                        PM
+                    <Avatar alt="Remy Sharp"  className={classes.green}>
+                        AGV
                     </Avatar>
                 </IconButton>
             </Tooltip>

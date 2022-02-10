@@ -2,6 +2,7 @@ import Layout from "../../components/Layout";
 import DataTable from "../../components/DataTable";
 import { useState } from "react";
 import Table from "../../components/TableG";
+import CustomBox from "../../components/CustomBox";
 
 function Mision ({}){
   const columns =  [
@@ -20,8 +21,9 @@ const data=[
 
     return (
         <Layout>
-            {/* <DataTable/> */}
-            <Table columns={columns} data={data} filter="fechaEje" aux={1}/>
+            <CustomBox especialClass='flex items-center flex-col'>
+              <Table columns={columns} data={data} filter="fechaEje" acciones={true}/>
+            </CustomBox>
         </Layout>
       )
 }

@@ -1,16 +1,11 @@
 import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
-import TableRow from '@mui/material/TableRow';
 import {useState, useEffect} from 'react'
 import {TiEdit, TiDeleteOutline} from 'react-icons/ti'
 import { useFilters, useSortBy, useTable } from 'react-table';
 
-function TableG({token, data, columns,filter, aux}) {
+function TableG({token, data, columns,filter, acciones}) {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(50);
     const [colors, setColors] = useState(['#222b36', 'whitesmoke'])
@@ -65,7 +60,7 @@ function TableG({token, data, columns,filter, aux}) {
     return (
         <div>
             <input
-                style={{color:'black'}}
+                style={{color:'black', border:'solid', borderColor:'#D0D6D2', borderRadius:'8px'}}
                 Value={filterInput}
                 onChange={(e) => handleFilterChange(e.target.value)}
                 placeholder={"Buscar fecha"}
@@ -73,23 +68,27 @@ function TableG({token, data, columns,filter, aux}) {
             <br/><br/>
             <Paper sx={{ width: '100%', overflow: 'hidden', color: 'whitesmoke'}}>
             <TableContainer sx={{ maxHeight: 800 }}>
-                <table {...getTableProps()}>
+                <table {...getTableProps()} style={{ width:'80vw', borderRadius:'8px'}}>
                     <thead>
                         {headerGroups.map(headerGroup => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
                             {headerGroup.headers.map(column => (
-                            <th {...column.getHeaderProps()}   
+                            <th {...column.getHeaderProps(column.getSortByToggleProps())}  
+                                className='column.isSorted
+                                ? column.isSortedDesc
+                                ? "sort-desc"
+                                : "sort-asc"
+                                : ""'
                                 style={{ minWidth: column.minWidth, background:'#5CBC99', color:'white', fontFamily:'sans-serif', fontSize:'14px',height:50 }}>
-                                {column.render("Header")}</th>
+                                &nbsp;&nbsp;{column.render("Header")}&nbsp;&nbsp;<span>{column.isSorted
+                                            ? column.isSortedDesc
+                                                ? ' 🔽': ' 🔼': ''}</span></th>
                             ))}
-                            {/* {()=>{
-                                if (aux==1){
-                                    return  */}
+                                {acciones==true&&(
                                     <th   
                                     style={{ minWidth: 170, background:'#5CBC99', color:'white', fontFamily:'sans-serif', fontSize:'14px',height:50 }}>
                                     ACCIONES </th>
-                            {/*      }
-                             }} */}
+                                )} 
                         </tr>
                         ))}
                     </thead>
@@ -99,22 +98,25 @@ function TableG({token, data, columns,filter, aux}) {
                             console.log(row.cells[0].value)
                             return (
                                 <tr {...row.getRowProps()} id={i}
-                                style={{color:'black', background:'whitesmoke'}}>
+                                style={{color:'black'}}>
                                     {row.cells.map(cell => {
                                             return <td {...cell.getCellProps()}>{cell.render("Cell")}</td>;  
                                     })}
-                                    <td>
-                                        <div className='flex items-center gap-2'>
-                                            <div className='text-red-400 dark:text-white text-3xl dark:hover:text-red-400 cursor-pointer'>
-                                                <TiDeleteOutline/>
-                                                {/* {row.cells[0].value} */}
-                                            </div>
+                                    {acciones==true&&(
+                                        <td>
+                                            <div className='flex items-center gap-2'>
+                                                <div className='text-red-400 dark:text-white text-3xl dark:hover:text-red-400 cursor-pointer'>
+                                                    <TiDeleteOutline/>
+                                                    {/* {row.cells[0].value} */}
+                                                </div>
 
-                                            <div className='text-blue-400 dark:text-white text-3xl dark:hover:text-blue-400 cursor-pointer'>
-                                                <TiEdit/>
+                                                <div className='text-blue-400 dark:text-white text-3xl dark:hover:text-blue-400 cursor-pointer'>
+                                                    <TiEdit/>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td> 
+                                        </td> 
+                                    )}
+                                    
                                 </tr>
                             );
                         })}
