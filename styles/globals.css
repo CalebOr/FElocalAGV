@@ -66,4 +66,57 @@
     .text-colors{
         @apply text-black dark:text-white;
     }
+    .azul {
+        border-radius:20px;
+        width:20px;
+        height:20px;
+        position:absolute;
+        background:blue;
+        z-index:1; /*El z-index de la caja azul es menor al de la caja roja*/
+        left:27.8%;
+        top:23%;
+      }
+      
+      .rojo {
+        border-radius:20px;
+        width:20px;
+        height:20px;
+        position:absolute;
+        background:red;
+        z-index:2; /*El z-index es mayor al de la caja azul por lo que se muestra primero que la caja roja*/
+        left:67.2%;
+        top:100.5%;
+      }
+      .verde {
+        border-radius:20px;
+        width:20px;
+        height:20px;
+        position:absolute;
+        background:green;
+        z-index:2; /*El z-index es mayor al de la caja azul por lo que se muestra primero que la caja roja*/
+        left:57.2%;
+        top:100.7%;
+      }
+
+      .mapeo {
+      
+        z-index:2; /*El z-index es mayor al de la caja azul por lo que se muestra primero que la caja roja*/
+        position:absolute;
+      }
+
+      .imgg {
+       
+        z-index:1; /*El z-index es mayor al de la caja azul por lo que se muestra primero que la caja roja*/
+        position:absolute;
+      }
+
+      .ruta {
+        border-radius:20px;
+        width:20px;
+        height:20px;
+        position:absolute;
+        background:green;
+        z-index:2; /*El z-index es mayor al de la caja azul por lo que se muestra primero que la caja roja*/
+        
+      }
 }
