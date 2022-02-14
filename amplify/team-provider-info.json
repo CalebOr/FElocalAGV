@@ -20,6 +20,10 @@
         "S3Trigger3a08108f": {
           "deploymentBucketName": "amplify-agvs3-dev-102429-deployment",
           "s3Key": "amplify-builds/S3Trigger3a08108f-43326c432f6451713767-build.zip"
+        },
+        "agvsLDB": {
+          "deploymentBucketName": "amplify-agvs3-dev-102429-deployment",
+          "s3Key": "amplify-builds/agvsLDB-4e577250796b47774972-build.zip"
         }
       }
     }

@@ -113,7 +113,7 @@ function Mapa({token}){
     //  });
 
    
-   }, 1300);
+   }, 2000);
 
    function imprime(){
      console.log('lalalalalalallalalalalal')
