@@ -28,9 +28,9 @@ export default function ContentFormTar({id, tarima,token}) {
                 body: JSON.stringify({ "AGV":"1", "ruta": ""+ruta+"",  "momento": ""+unix+""  })
             };  
         console.log(requestOptions)
-            //  fetch('https://intxgh6og0.execute-api.us-east-1.amazonaws.com/servs/leer', requestOptions)
-            // .then(res => res.json()) 
-            // .then(res => console.log(res));
+             fetch('https://intxgh6og0.execute-api.us-east-1.amazonaws.com/servs/nuevaruta', requestOptions)
+            .then(res => res.json()) 
+            .then(res => console.log(res));
     }
     useEffect(()=>{
 

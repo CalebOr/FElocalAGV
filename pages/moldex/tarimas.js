@@ -15,6 +15,8 @@ function Tarimas({token}){
     const [tarima, setTarima]=useState(1)
     const [title, setTitle] =  useState('')
     const [Bateria, setBateria] = useState('')
+    const [Home, setHome] = useState()
+    const [Espacio, setEspacio] =useState(0)
     const options=[
         {label:'Tarimas 1.4x1.2 mts', value:'1'},
         {label:'Tarimas 1.2x1.2 mts', value:'2'}
@@ -33,17 +35,44 @@ function Tarimas({token}){
         let separarD=rplazo.split(',')
         console.log("Mis datos: "+separarD)
         let Bateria2=separarD[12].split(':');
-        let x=separarD[1].split(':');
-        let y=separarD[2].split(':');
-        console.log('Mi X: ',x[1],' Mi Y: ',y[1])
+        let IdAGV=separarD[3].split(':')
+        console.log('Mi AGV es: '+IdAGV[1])
+            setHome(IdAGV[1])
         console.log('Mi bateria es: '+ Bateria2[1])
+        if (Bateria2[1]=='BAT1'){
+            setBateria('25% (Recarga pronto)')
+        }else if(Bateria2[1]=='BAT2'){
+            setBateria('50%')
+        }else if(Bateria2[1]=='BAT3'){
+            setBateria('75%')
+        }else if(Bateria2[1]=='BAT4'){
+            setBateria('100%')
+        }else{
+            setBateria('Recargando AGV ## %')
+        }
+    }
+    async function RegresarHome(){
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Authorization': token },
+            body: JSON.stringify({ "AGV":"1", "ruta": Home+"_1",  "momento": "584"  })
+        };  
+        console.log(requestOptions)
+        fetch('https://intxgh6og0.execute-api.us-east-1.amazonaws.com/servs/nuevaruta', requestOptions)
+        .then(res => res.json()) 
+        .then(res => console.log(res));
     }
     async function changeModal3(e){
         setTarima(e)
+        if (e==1){
+            setEspacio(42)
+        }else{
+            setEspacio(48)
+        }
         setModalT(!modalT)
-        AGVDatos()
     }
     useEffect(() => {  
+        changeModal3()
         const requestOptions = {
             method: 'POST',
             headers: { 'Authorization': token },
@@ -78,14 +107,22 @@ function Tarimas({token}){
                 </div>
                 <br/>
             </Modal>
-            <button
-                className="text-[black]"
-                onClick={changeModal} 
-            ><InfoTwoTone className="text-[#3e84b3]"/></button>
-            <div className='flex flex-col items-center text-black w-[100%]'>
-                <p>AGV 1</p>
-                <p>Nivel de batería 100%</p>
+            <div className="grid-col-3 flex ">
+                <button
+                    className="text-[black] text-5xl"
+                    onClick={changeModal} 
+                ><InfoTwoTone className="text-[#3e84b3]"/></button>
+                <div className='flex flex-col items-center text-black w-[100%]'>
+                    <p className="text-5xl text-black">AGV 1</p>
+                    <p className="text-xl text-gray-600">Nivel de batería: {Bateria}</p>
+                    <br/>
+                </div>
+                <button
+                    className="text-[white]  border-[#2ca577] bg-[#3b9174] h-[15%] rounded-md"
+                    onClick={()=>RegresarHome()} >Regresar a Home</button>
             </div>
+            
+
             <div className=" w-[75vw] h-[80vh] ">
                 <div className="grid grid-cols-4 gap-3 h-[22vh]">
                         <div className="bg-[#4E5255] border-[white] border-solid border-2">
@@ -130,7 +167,7 @@ function Tarimas({token}){
                     </div>
                     <br/>
                     <div className="text-[black] text-5xl text-right">
-                        <span>48 Espacios Disponibles</span>
+                        <span>{Espacio} Espacios Disponibles</span>
                     </div>
             </div>
 
