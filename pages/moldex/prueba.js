@@ -17,11 +17,7 @@ const trackStyles = {
 }
 
 
-  // const [prod1, setProd1] = useState([])
-  // const [name, setName] =useState([])
-  // let [x,SetX]=useState(1)//x- origen -224
-  // let [y,SetY]=useState(1)//y- origen -496
-  // let[bateria,setBateria]=useState()
+ 
   let rplazo
   let separarD
   let i=0
@@ -73,11 +69,11 @@ const trackStyles = {
   ];
 
 
-class App extends React.Component{
+class prueba1 extends React.Component{
   
   constructor(props){
     super(props);
-    this.state = {apiResponse:"", x: '', y: ''}
+    this.state = {apiResponse:"", x1: '', y1: ''}
     
   }
 
@@ -115,28 +111,16 @@ class App extends React.Component{
   //   // SetY((y[1]/100)*-1)
   //   //crear set para bateria
   
-    
-      // console.log('mi xssa:',(((obj.state.reported.x)/100)+678)*(1))
-  
-      // //SetX((((obj.state.reported.x)/100)+678)*(1) )
-  
-      // console.log('mi yssa:',(((obj.state.reported.y)/100)-531)*(-1))
-      // //SetY((((obj.state.reported.y)/100)-531)*(-1))
-      // this.setState({x: (((obj.state.reported.x)/100)+678)*(1), y: (((obj.state.reported.y)/100)-531)*(-1)});
-      // console.log('state x: ', this.state.x, 'state y: ', this.state.y)
-
-
-      const  xssa = (((obj.state.reported.x)/100)+678)*(1)
-      const  yssa = (((obj.state.reported.y)/100)-531)*(-1)
+      const  xssa = (((obj.state.reported.x)/100)+22.4)*(1)
+      const  yssa = (((obj.state.reported.y)/100)-496)*(-1)
       console.log('mi xssa:',xssa)
   
       //SetX((((obj.state.reported.x)/100)+678)*(1) )
   
       console.log('mi yssa:',yssa)
       //SetY((((obj.state.reported.y)/100)-531)*(-1))
-      this.setState({x: xssa, y: yssa});
+      this.setState({x1: xssa, y1: yssa});
       
-  
   
    }
   
@@ -178,7 +162,8 @@ class App extends React.Component{
     setInterval(() => {
       //console.log(miToken);
       this.pedirDatos(miToken)
-    }, 1000);
+      console.log('state x1: ', this.state.x1, 'state y1: ', this.state.y1)
+    }, 500);
     //this.actualizarValoresAG(miToken, ultimoTime);
   }
 
@@ -190,16 +175,17 @@ class App extends React.Component{
       <Layout>
  
       <div className="container-img absolute z-10" class="mapeo" >
-      <svg  width="1415.18" height="790.18"   class="mapeo"  >
+      <svg  width="232" height="626"   class="mapeo"  >
             <Animate  class="mapeo" 
               start={{ cx: 0, cy: 0 }}
-              enter={{ cx: this.state.x, cy: this.state.y }}
-              update={{ cx: this.state.x, cy: this.state.y }}
+              enter={{ cx: this.state.x1, cy: this.state.y1 }}
+              update={{ cx: this.state.x1, cy: this.state.y1,timing: { duration: 1000} }}
+              
             >
-              {d => <circle cx={d.cx} cy={d.cy} r="10" stroke="black" fill="red" > <title>AGV1:</title></circle> }
+              {d => <circle cx={d.cx} cy={d.cy} r="8" stroke="black" fill="red" > <title>AGV1:</title></circle> }
             </Animate>
           </svg>
-          <Image src={require('/image/prueba1.png')}   width="1415.18" height="790.18" objectFit='cover' />
+          <Image src={require('/image/mprueba.png')}   width="232" height="626" objectFit='cover' />
           
        </div>
   
@@ -210,7 +196,7 @@ class App extends React.Component{
   }
 }
 
-export default App;
+export default prueba1;
 
 export async function getServerSideProps({req}) {
   const {Auth,API} = withSSRContext({req});
