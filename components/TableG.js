@@ -68,7 +68,7 @@ function TableG({token, data, columns,filter, acciones}) {
             <br/><br/>
             <Paper sx={{ width: '100%', overflow: 'hidden', color: 'whitesmoke'}}>
             <TableContainer sx={{ maxHeight: 800 }}>
-                <table {...getTableProps()} style={{ width:'80vw', borderRadius:'8px'}}>
+                <table className=' w-[80vw] ' {...getTableProps()} style={{ borderRadius:'8px'}}>
                     <thead>
                         {headerGroups.map(headerGroup => (
                         <tr {...headerGroup.getHeaderGroupProps()}>
@@ -79,7 +79,7 @@ function TableG({token, data, columns,filter, acciones}) {
                                 ? "sort-desc"
                                 : "sort-asc"
                                 : ""'
-                                style={{ minWidth: column.minWidth, background:'#5CBC99', color:'white', fontFamily:'sans-serif', fontSize:'14px',height:50 }}>
+                                style={{ background:'#5CBC99', color:'white', fontFamily:'sans-serif', fontSize:'14px',height:50 }}>
                                 &nbsp;&nbsp;{column.render("Header")}&nbsp;&nbsp;<span>{column.isSorted
                                             ? column.isSortedDesc
                                                 ? ' 🔽': ' 🔼': ''}</span></th>

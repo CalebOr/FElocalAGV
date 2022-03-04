@@ -78,7 +78,7 @@ function Tarimas({token}){
             headers: { 'Authorization': token },
             body: JSON.stringify({ "thing":"M5GPS" })
         };  
-        fetch('https://intxgh6og0.execute-api.us-east-1.amazonaws.com/servs/leer', requestOptions)
+        fetch('https://intxgh6og0.execute-api.us-east-1.amazonaws.com/servs/estadoagv', requestOptions)
         .then(res => res.json()) 
         .then(res =>AGVDatos(res.body));
 
@@ -126,43 +126,43 @@ function Tarimas({token}){
             <div className=" w-[75vw] h-[80vh] ">
                 <div className="grid grid-cols-4 gap-3 h-[22vh]">
                         <div className="bg-[#4E5255] border-[white] border-solid border-2">
-                            <CompTarima id={'posA'} aux={1} letra={'A'} action={()=>changeModal2('Ocupar espacio A','A')}/>
+                            <CompTarima id={'posA'} aux={1} letra={'A'} action={()=>changeModal2('Ocupar espacio A','2')}/>
                         </div>
                         <div className="bg-[#65686B] border-[white] border-solid border-2">
-                            <CompTarima id={'posB'} aux={1} letra={'B'} action={()=>changeModal2('Ocupar espacio B','B')}/>
+                            <CompTarima id={'posB'} aux={1} letra={'B'} action={()=>changeModal2('Ocupar espacio B','3')}/>
                         </div>
                         <div className="bg-[#4E5255] border-[white] border-solid border-2">
-                            <CompTarima id={'posC'} aux={1} letra={'C'} action={()=>changeModal2('Ocupar espacio C','C')}/>
+                            <CompTarima id={'posC'} aux={1} letra={'C'} action={()=>changeModal2('Ocupar espacio C','4')}/>
                         </div>
                         <div className="bg-[#65686B] border-[white] border-solid border-2">
-                            <CompTarima id={'posD'} aux={1} letra={'D'} action={()=>changeModal2('Ocupar espacio D','D')}/>
+                            <CompTarima id={'posD'} aux={1} letra={'D'} action={()=>changeModal2('Ocupar espacio D','5')}/>
                         </div>
                     </div>
                     <br/>
                     <div className="grid grid-cols-3 gap-4 h-[22vh]">
                         <div className="bg-[#4E5255] border-[white] border-solid border-2">
-                            <CompTarima id={'posE'} aux={1} letra={'E'} action={()=>changeModal2('Ocupar espacio E','E')}/>
+                            <CompTarima id={'posE'} aux={1} letra={'E'} action={()=>changeModal2('Ocupar espacio E','6')}/>
                         </div>
                         <div className="bg-[#65686B] border-[white] border-solid border-2">
-                            <CompTarima id={'posF'} aux={1} letra={'F'} action={()=>changeModal2('Ocupar espacio F','F')}/>
+                            <CompTarima id={'posF'} aux={1} letra={'F'} action={()=>changeModal2('Ocupar espacio F','7')}/>
                         </div>
                         <div className="bg-[#4E5255] border-[white] border-solid border-2">
-                            <CompTarima id={'posG'} aux={1} letra={'G'} action={()=>changeModal2('Ocupar espacio G','G')}/>
+                            <CompTarima id={'posG'} aux={1} letra={'G'} action={()=>changeModal2('Ocupar espacio G','8')}/>
                         </div>
                     </div>
                     <br/>
                     <div className="grid grid-cols-4 gap-4 h-[22vh]">
                         <div className="bg-[#65686B] border-[white] border-solid border-2">
-                            <CompTarima id={'posH'} aux={1} letra={'H'} action={()=>changeModal2('Ocupar espacio H','H')}/>
+                            <CompTarima id={'posH'} aux={1} letra={'H'} action={()=>changeModal2('Ocupar espacio H','9')}/>
                         </div>
                         <div className="bg-[#4E5255] border-[white] border-solid border-2">
-                            <CompTarima id={'posI'} aux={1} letra={'I'} action={()=>changeModal2('Ocupar espacio I','I')}/>
+                            <CompTarima id={'posI'} aux={1} letra={'I'} action={()=>changeModal2('Ocupar espacio I','10')}/>
                         </div>
                         <div className="bg-[#65686B] border-[white] border-solid border-2">
-                            <CompTarima id={'posJ'} aux={1} letra={'J'} action={()=>changeModal2('Ocupar espacio J','J')}/>
+                            <CompTarima id={'posJ'} aux={1} letra={'J'} action={()=>changeModal2('Ocupar espacio J','11')}/>
                         </div>
                         <div className="bg-[#4E5255] border-[white] border-solid border-2">
-                            <CompTarima id={'posK'} aux={1} letra={'K'} action={()=>changeModal2('Ocupar espacio K','K')}/>
+                            <CompTarima id={'posK'} aux={1} letra={'K'} action={()=>changeModal2('Ocupar espacio K','12')}/>
                         </div>
                     </div>
                     <br/>

@@ -22,7 +22,7 @@ const data=[
     return (
         <Layout>
             <CustomBox especialClass='flex items-center flex-col'>
-              <Table columns={columns} data={data} filter="fechaEje" acciones={true}/>
+              <Table columns={columns} data={data} filter="fechaEje" acciones={false}/>
             </CustomBox>
         </Layout>
       )
