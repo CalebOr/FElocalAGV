@@ -54,7 +54,7 @@ function login(token) {
                     timer: 1500
                   })
                   console.log(name)
-                  router.push('/moldex/mapa')
+                  router.push('/moldex/prueba')
                 // API.post('smpmoldexapi', '/user', {body:{action : 'userFind', idempleado: user }, headers:{Authorization: response.signInUserSession.idToken.jwtToken}})
                 // .then(response2=>{
                 //     if(response2.status === 200){

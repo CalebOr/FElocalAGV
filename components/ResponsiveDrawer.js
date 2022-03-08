@@ -33,7 +33,7 @@ function ResponsiveDrawer(props) {
         return null
     }
   } 
-const rutas=[{ruta:'/moldex/mapa'},{ruta:'/moldex/misiones'}, {ruta:'/moldex/tarimas'},{ruta:'/moldex/reportes'}];
+const rutas=[{ruta:'/moldex/prueba'},{ruta:'/moldex/misiones'}, {ruta:'/moldex/tarimas2'},{ruta:'/moldex/reportes'}];
   const drawer = (
     <div className="bg-[whitesmoke] font-bold text-white dark:bg-[#1b2635] pt-[0] h-[100vh] dark:text-white bg-gradient-to-t from-[#2E49B7] via-[#8B539B] to-[#CF5986]">
       <List className="ml-5 font-bold" >
