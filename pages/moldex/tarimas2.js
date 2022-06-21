@@ -44,16 +44,12 @@ function Tarimas({token}){
     }
     function AGVDatos(e){
         console.log(e)
-        let plazo= e.split('{')
-        console.log('AQUIIII RUTA:  ',plazo)
-        let rplazo= plazo[4].replace(/["{}]/g,"")
-        let separarD=rplazo.split(',')
-        console.log("Mis datos: "+separarD)
-        let Bateria2=separarD[12].split(':');
-        let IdAGV=separarD[3].split(':')
-        console.log('Mi AGV es: '+IdAGV[1])
-            setHome(IdAGV[1])
-        console.log('Mi bateria es: '+ Bateria2[1])
+        const dataJSON = e.data[0];
+        let Bateria2 = dataJSON['bat'];
+        let IdAGV = dataJSON['bat'];
+        console.log('Mi AGV es: '+IdAGV)
+        setHome(IdAGV)
+        console.log('Mi bateria es: '+ Bateria2)
         if (Bateria2[1]==' BAT1'){
             setBateria('25% (Recarga pronto)')
         }else if(Bateria2[1]==' BAT2'){
@@ -82,8 +78,8 @@ function Tarimas({token}){
                 )
         };  
         console.log(requestOptions)
-        fetch('https://intxgh6og0.execute-api.us-east-1.amazonaws.com/servs/enviarruta', requestOptions)
-        .then(res => res.json()) 
+        fetch('http://localhost:5000/nuevaruta', requestOptions)
+        .then(res => res.json())
         .then(res => console.log(res));
     }
    
@@ -92,12 +88,11 @@ function Tarimas({token}){
             method: 'POST',
             headers: { 'Authorization': token },
             body: JSON.stringify({ "thing":"M5GPS" })
-        };  
-        fetch('https://intxgh6og0.execute-api.us-east-1.amazonaws.com/servs/estadoagv', requestOptions)
-        .then(res => res.json()) 
-        .then(res =>AGVDatos(res.body));
+        };
+        fetch('http://localhost:5000/estadoagv', requestOptions)
+        .then(res => res.json())
+        .then(res =>AGVDatos(res));
 
-        
     }, [])
     return(
         <Layout>
