@@ -81,14 +81,14 @@ class App extends React.Component{
     
   }
 
-    pedirDatos(token){
+  pedirDatos(token){
     //console.log("Aqu'i va mi token Edwin¨",token)
     const requestOptions = {
       method: 'POST',
       headers: { 'Authorization': token },
       body: JSON.stringify({ "thing":"M5GPS" })
   };  
-  fetch('https://intxgh6og0.execute-api.us-east-1.amazonaws.com/servs/estadoagv', requestOptions)
+  fetch('http://localhost:5000/estadoagv', requestOptions)
   //fetch('https://intxgh6og0.execute-api.us-east-1.amazonaws.com/servs/estadoagv', requestOptions)
     .then(res => res.json()) 
     .then(res => {
@@ -97,7 +97,7 @@ class App extends React.Component{
         console.log('si jala')
         let obj = JSON.parse(res.body)
         //let x = obj.reported.x
-        console.log(obj.state.reported.x)
+        console.log(obj.X)
       
          if(res.body==undefined){
           console.log('sin datos brooooo')
@@ -108,7 +108,7 @@ class App extends React.Component{
   //   let x=separarD[1].split(':');
   //   let y=separarD[2].split(':');
   //   let bat=separarD[12].split(':');
-    console.log('Mi X: ',obj.state.reported.x,' Mi Y: ',obj.state.reported.y)
+    console.log('Mi X: ',obj.X,' Mi Y: ',obj.Y)
   //   console.log('bateria:',bat[1])
   //   setBateria(bat[1])
   //   // SetX((x[1]/100)*-1)
@@ -126,8 +126,8 @@ class App extends React.Component{
       // console.log('state x: ', this.state.x, 'state y: ', this.state.y)
 
 
-      const  xssa = (((obj.state.reported.x)/100)+678)*(1)
-      const  yssa = (((obj.state.reported.y)/100)-531)*(-1)
+      const  xssa = (((obj.X)/100)+678)*(1)
+      const  yssa = (((obj.Y)/100)-531)*(-1)
       console.log('mi xssa:',xssa)
   
       //SetX((((obj.state.reported.x)/100)+678)*(1) )
@@ -165,8 +165,6 @@ class App extends React.Component{
     //;
      
   }
-
-  
     
   componentWillMount(){
     const miToken = this.props.token;

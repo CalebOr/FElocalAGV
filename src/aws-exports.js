@@ -26,8 +26,8 @@ const awsmobile = {
     "aws_user_files_s3_bucket_region": "us-east-1",
     "aws_cloud_logic_custom": [
         {
-            "name": "agvapi2",
-            "endpoint": "https://fqz0dnlgae.execute-api.us-east-1.amazonaws.com/dev",
+            "name": "agvsLDB",
+            "endpoint": "https://a310xjonbb.execute-api.us-east-1.amazonaws.com/dev",
             "region": "us-east-1"
         }
     ]

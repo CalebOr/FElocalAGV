@@ -77,15 +77,13 @@ class prueba1 extends React.Component{
     
   }
 
-    pedirDatos(token){
-    //console.log("Aqu'i va mi token Edwin¨",token)
+  pedirDatos(token){
     const requestOptions = {
       method: 'POST',
       headers: { 'Authorization': token },
       body: JSON.stringify({ "thing":"M5GPS" })
-  };  
-  fetch('https://intxgh6og0.execute-api.us-east-1.amazonaws.com/servs/estadoagv', requestOptions)
-  //fetch('https://intxgh6og0.execute-api.us-east-1.amazonaws.com/servs/estadoagv', requestOptions)
+    };
+    fetch('http://localhost:5000/estadoagv', requestOptions)
     .then(res => res.json()) 
     .then(res => {
         console.log('nueva conn')
@@ -93,61 +91,32 @@ class prueba1 extends React.Component{
         console.log('si jala')
         let obj = JSON.parse(res.body)
         //let x = obj.reported.x
-        console.log(obj.state.reported.x)
+        console.log(obj.X)
       
-         if(res.body==undefined){
-          console.log('sin datos brooooo')
-       }else{
-  //       rplazo= res.body.replace(/["{}]/g,"")
-  //    separarD=rplazo.split(',')
-  //   console.log("Mis datos: "+separarD)
-  //   let x=separarD[1].split(':');
-  //   let y=separarD[2].split(':');
-  //   let bat=separarD[12].split(':');
-    console.log('Mi X: ',obj.state.reported.x,' Mi Y: ',obj.state.reported.y)
-  //   console.log('bateria:',bat[1])
-  //   setBateria(bat[1])
-  //   // SetX((x[1]/100)*-1)
-  //   // SetY((y[1]/100)*-1)
-  //   //crear set para bateria
-  
-      const  xssa = (((obj.state.reported.x)/100)+22.4)*(1)
-      const  yssa = (((obj.state.reported.y)/100)-496)*(-1)
-      console.log('mi xssa:',xssa)
-  
-      //SetX((((obj.state.reported.x)/100)+678)*(1) )
-  
-      console.log('mi yssa:',yssa)
-      //SetY((((obj.state.reported.y)/100)-531)*(-1))
-      this.setState({x1: xssa, y1: yssa});
-      
-  
-   }
-  
-  //  setTimeout(() => {
-  //   //this.actualizarValoresAG(miToken, ultimoTime);
-  //   this.pedirDatos()
-  // }, 200);
-  
-     })
-    //  .then(res => {
-    //   setTimeout(() => {
-    //     //this.actualizarValoresAG(miToken, ultimoTime);
-    //     this.pedirDatos();
-    //   }, 200);
-    // })
-     
-     .catch(() => {
-      //alert('failed to fetch');
+          if(res.body==undefined){
+            console.log('sin datos brooooo')
+          }else{
+            console.log('Mi X: ',obj.X,' Mi Y: ',obj.Y)  
+            const  xssa = (((obj.X)/100)+22.4)*(1)
+            const  yssa = (((obj.Y)/100)-496)*(-1)
+            console.log('mi xssa:',xssa)
+        
+            //SetX((((obj.state.reported.x)/100)+678)*(1) )
+        
+            console.log('mi yssa:',yssa)
+            //SetY((((obj.state.reported.y)/100)-531)*(-1))
+            this.setState({x1: xssa, y1: yssa});
+          }
+    })
+
+    .catch(() => {
       console.log('ERROR DE CONEXION *********************')
       i=i+1
       console.log(i)
       if(i==40){
         window.location.reload();
       }
-    });
-    //;
-     
+    });     
   }
 
   

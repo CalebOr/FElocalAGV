@@ -104,10 +104,10 @@ export default function ContentFormTar({id, tarima,token}) {
                     )
             }; 
             console.log(requestOptions)
-                fetch('https://intxgh6og0.execute-api.us-east-1.amazonaws.com/servs/enviarruta', requestOptions)
+                fetch('http://localhost:5000/enviarruta', requestOptions)
                 .then(res => res.json()) 
                 .then(function(res2){
-                        fetch('https://intxgh6og0.execute-api.us-east-1.amazonaws.com/servs/enviarruta', requestOptions2)
+                        fetch('http://localhost:5000/enviarruta', requestOptions2)
                         .then(res2 => res2.json()) 
                         .then(res2 => console.log(res2));
                 });
