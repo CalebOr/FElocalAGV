@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import Select from "react-select";
+import axios from "axios";
 import Image from 'next/image';
 import Swal from 'sweetalert2';
+import ReactDOM from "react-dom";
 
 export default function ContentFormTar({id, tarima}) {
     const [val1, setVal1]=useState(0)
@@ -18,6 +20,7 @@ export default function ContentFormTar({id, tarima}) {
     const [val12, setVal12]=useState(0)
     const [hora, setHora]=useState()
     const [dia2, setDia2]=useState('2022-03-04')
+    const [inputList, setInputList] = useState([]);
 
 
     function setValues(a){
@@ -117,12 +120,23 @@ export default function ContentFormTar({id, tarima}) {
                     showConfirmButton: false,
                     timer: 1500
                   })
-            }
-                
-            
+        }
     }
-    useEffect(()=>{
 
+    useEffect(()=>{
+        axios.post('http://localhost:5000/asknodes')
+        .then(res => {
+            var listTemp = [];
+            for(const x in res.data){
+                const description = res.data[x].Description;
+                const id = res.data[x].Id;
+                if(res.data[x].Description.length>12){
+                    continue;
+                }
+                listTemp.push(<button id={'Esp'+id} className='border-4 border-solid border-indigo-50' onClick={(e)=>setValues(id)} style={{backgroundColor:(val1=='1'?'#4F91BB':val2=='1'?'#923128':'')}}><span className='text-white text-sm sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl'>{description}</span></button>);
+            }
+            setInputList(listTemp);
+        });
     }, []);
 
     return (
@@ -142,23 +156,7 @@ export default function ContentFormTar({id, tarima}) {
                                     <h1 className="text-center">Seleccione el destino</h1>
                                     {tarima==1&&(
                                         <div className='grid grid-cols-3 top-[10%] left-2 text-center h-[40%] absolute w-[70%] z-10 '>
-                                            <button id='Esp1' className='border-4 border-solid border-indigo-50' onClick={(e)=>setValues(1)} style={{backgroundColor:(val1=='1'?'#4F91BB':val2=='1'?'#923128':'')}}><span className='text-white text-sm sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl'>Home</span></button>
-                                            <button id='Esp2' className='border-4 border-solid border-indigo-50' onClick={(e)=>setValues(5)} style={{backgroundColor:(val1=='5'?'#4F91BB':val3=='1'?'#923128':'')}}><span className='text-white text-sm sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl'>Espacio 1</span></button>
-                                            <button id='Esp3' className='border-4 border-solid border-indigo-50' onClick={(e)=>setValues(8)} style={{backgroundColor:(val1=='8'?'#4F91BB':val4=='1'?'#923128':'')}}><span className='text-white text-sm sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl'>Espacio 2</span></button>
-                                            <button id='Esp4' className='border-4 border-solid border-indigo-50'  style={{backgroundColor:'green'}}><span className='text-white text-sm sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl'></span></button>
-                                          
-                                            <button id='Esp8' className='border-4 border-solid border-indigo-50' onClick={(e)=>setValues(9)} style={{backgroundColor:(val1=='9'?'#4F91BB':val6=='1'?'#923128':'')}}><span className='text-white text-sm sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl'>nodo 1</span></button>
-                                            <button id='Esp9' className='border-4 border-solid border-indigo-50' onClick={(e)=>setValues(10)} style={{backgroundColor:(val1=='10'?'#4F91BB':val7=='1'?'#923128':'')}}><span className='text-white text-sm sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl'>nodo 2</span></button>
-                                            <button id='Esp10' className='border-4 border-solid border-indigo-50' onClick={(e)=>setValues(11)} style={{backgroundColor:(val1=='11'?'#4F91BB':val8=='1'?'#923128':'')}}><span className='text-white text-sm sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl'>nodo 3</span></button>
-                                            <button id='Esp11' className='border-4 border-solid border-indigo-50' onClick={(e)=>setValues(12)} style={{backgroundColor:(val1=='12'?'#4F91BB':val9=='1'?'#923128':'')}}><span className='text-white text-sm sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl'>nodo 4</span></button>
-                                            
-                                            <button id='Esp15' className='border-4 border-solid border-indigo-50' onClick={(e)=>setValues(13)} style={{backgroundColor:(val1=='13'?'#4F91BB':val10=='1'?'#923128':'')}}><span className='text-white text-sm sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl'>nodo 5</span></button>
-                                            <button id='Esp16' className='border-4 border-solid border-indigo-50' onClick={(e)=>setValues(14)} style={{backgroundColor:(val1=='14'?'#4F91BB':val11=='1'?'#923128':'')}}><span className='text-white text-sm sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl'>nodo 6</span></button>
-                                            <button id='Esp17' className='border-4 border-solid border-indigo-50' onClick={(e)=>setValues(15)} style={{backgroundColor:(val1=='15'?'#4F91BB':val12=='1'?'#923128':'')}}><span className='text-white text-sm sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl'>parcial</span></button>
-                                            <button id='Esp18' className='border-4 border-solid border-indigo-50' onClick={()=>LiberarE()} style={{backgroundColor:'green'}}><span className='text-white text-sm sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl'>LIBERAR ESPACIOS</span></button>
-                                            
-                                           
-
+                                            {inputList}
                                         </div>
                                     )}
                                     
