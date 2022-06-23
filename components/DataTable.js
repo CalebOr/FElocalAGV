@@ -4,7 +4,7 @@ import { MDBDataTableV5 } from 'mdbreact';
 import { useState } from "react";
 import { green, yellow } from "@material-ui/core/colors";
 
-function DataTable ({data2,token, columns2}){
+function DataTable ({data2, columns2}){
     const [datatable, setDatatable] = useState({
         columns: [
           {

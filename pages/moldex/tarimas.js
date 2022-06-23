@@ -3,11 +3,10 @@ import Modal from "../../components/Modal";
 import { InfoTwoTone } from "@material-ui/icons";
 import CompTarima from "../../components/CompTarima";
 import ContentFormTar from "../../components/ContentFormTar";
-import {Auth, withSSRContext,API} from 'aws-amplify';
 import Image from "next/image";
 import Select from "react-select";
 import { useEffect, useState } from "react";
-function Tarimas({token}){
+function Tarimas(){
     const [modal, setModal]= useState(false);
     const [modal2, setModal2]= useState(false);
     const [modalT, setModalT]=useState(false);
@@ -54,7 +53,6 @@ function Tarimas({token}){
     async function RegresarHome(){
         const requestOptions = {
             method: 'POST',
-            headers: { 'Authorization': token },
             body: JSON.stringify({ "AGV":"1", "ruta": Home+"_1",  "momento": "584"  })
         };  
         console.log(requestOptions)
@@ -75,7 +73,6 @@ function Tarimas({token}){
         changeModal3()
         const requestOptions = {
             method: 'POST',
-            headers: { 'Authorization': token },
             body: JSON.stringify({ "thing":"M5GPS" })
         };  
         fetch('https://intxgh6og0.execute-api.us-east-1.amazonaws.com/servs/estadoagv', requestOptions)
@@ -93,7 +90,7 @@ function Tarimas({token}){
                 <br/>
             </Modal>
             <Modal active={modal2} title={title} action={changeModal2}>
-                <ContentFormTar id={inicio} tarima={tarima} token={token}/>
+                <ContentFormTar id={inicio} tarima={tarima}/>
             </Modal>
             <Modal active={modalT} title='Escoge el tipo de Tarima a acomodar' action={changeModal3}>
                 <br/>
@@ -176,22 +173,3 @@ function Tarimas({token}){
 }
   
   export default Tarimas
-  export async function getServerSideProps({req}) {
-    const {Auth,API} = withSSRContext({req});
-    try{
-        const user = await Auth.currentAuthenticatedUser();
-        
-        return{
-            props:{
-                authenticated: true,
-                user: user.username,
-                token: user.signInUserSession.idToken.jwtToken
-            }
-        }
-    }catch(err){
-        return{
-            props:{authenticated: false}
-        }
-    }
-  }
-  

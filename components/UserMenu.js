@@ -2,7 +2,6 @@ import Fade from 'react-reveal/Fade';
 import CloseIcon from '@material-ui/icons/Close';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import styled from 'styled-components';
-import {Auth, withSSRContext} from 'aws-amplify'
 import { useRouter } from 'next/dist/client/router';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
@@ -15,7 +14,6 @@ const ListItem = styled.div`
 function UserMenu({active, setUserMenu, dark}) {
   const router = useRouter()
     async function Logout(){
-        Auth.signOut()
         router.push('/login')
     }
 

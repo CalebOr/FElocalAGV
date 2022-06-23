@@ -5,7 +5,7 @@ import {useState, useEffect} from 'react'
 import {TiEdit, TiDeleteOutline} from 'react-icons/ti'
 import { useFilters, useSortBy, useTable } from 'react-table';
 
-function TableG({token, data, columns,filter, acciones}) {
+function TableG({data, columns,filter, acciones}) {
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(50);
     const [colors, setColors] = useState(['#222b36', 'whitesmoke'])

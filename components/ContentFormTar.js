@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Select from "react-select";
 import Image from 'next/image';
 
-export default function ContentFormTar({id, tarima,token}) {
+export default function ContentFormTar({id, tarima}) {
     const [val1, setVal1]=useState(0)
     const [val2, setVal2]=useState(0)
     const [hora, setHora]=useState()
@@ -21,10 +21,8 @@ export default function ContentFormTar({id, tarima,token}) {
         let ruta=id+"_"+val1
 
         console.log('Mi fecha: ', format,' a Formato unix: '+unix)
-        console.log('Mi token: '+token)
         const requestOptions = {
                 method: 'POST',
-                headers: { 'Authorization': token },
                 body: JSON.stringify({ "AGV":"1", "ruta": ""+ruta+"",  "momento": ""+unix+""  })
             };  
         console.log(requestOptions)

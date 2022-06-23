@@ -15,7 +15,6 @@ import { useRouter } from 'next/dist/client/router';
 import Tooltip from '@material-ui/core/Tooltip';
 import UserMenu from './UserMenu';
 import Header from '../components/Header'
-import {Auth, Storage, API} from 'aws-amplify'
 import MenuIcon from '@material-ui/icons/Menu'
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -43,11 +42,6 @@ function Topbar(props) {
     const [userMenu, setUserMenu] = useState(false)
     const [userName, setUserName] = useState('')
     const [avatarImage, setAvatarImage] = useState('')
-    async function getProfileInfo(){
-        const user = await Auth.currentAuthenticatedUser()
-        const image = await Storage.get('profile/' + user.username + '.jpg')
-        setAvatarImage(image)
-    }
     async function getname(){
         // const user = await Auth.currentAuthenticatedUser()
         // API.post('smpmoldexapi', '/user', {body:{action : 'userFind', idempleado: user.username }, headers:{Authorization: user.signInUserSession.idToken.jwtToken}})
@@ -63,7 +57,6 @@ function Topbar(props) {
         setUserName('Montserrath Olivo')
     }
     useEffect(() => {
-        getProfileInfo()
         getname()
     }, [])
     useEffect(() => {

@@ -3,7 +3,7 @@ import Select from "react-select";
 import Image from 'next/image';
 import Swal from 'sweetalert2';
 
-export default function ContentFormTar({id, tarima,token}) {
+export default function ContentFormTar({id, tarima}) {
     const [val1, setVal1]=useState(0)
     const [val2, setVal2]=useState(0)
     const [val3, setVal3]=useState(0)
@@ -76,10 +76,8 @@ export default function ContentFormTar({id, tarima,token}) {
             let ruta=id+"_"+val1
 
             console.log('Mi fecha: ', format,' a Formato unix: '+unix)
-            console.log('Mi token: '+token)
             const requestOptions = {
                     method: 'POST',
-                    headers: { 'Authorization': token },
                     body: JSON.stringify({
                         "tabla": "misiones",
                         "datos": {
@@ -92,7 +90,6 @@ export default function ContentFormTar({id, tarima,token}) {
                 };  
             const requestOptions2 = {
                 method: 'POST',
-                headers: { 'Authorization': token },
                 body: JSON.stringify({
                     "tabla": "misiones",
                     "datos": {

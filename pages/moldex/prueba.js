@@ -3,7 +3,6 @@ import {useState, useEffect} from 'react'
 import ReactDOM from 'react-dom';
 import React from 'react';
 import Image from 'next/image'
-import {Auth, withSSRContext,API} from 'aws-amplify';
 import  {element, Component} from 'react' 
 import Animate from "react-move/Animate";
 
@@ -77,10 +76,9 @@ class prueba1 extends React.Component{
     
   }
 
-  pedirDatos(token){
+  pedirDatos(){
     const requestOptions = {
       method: 'POST',
-      headers: { 'Authorization': token },
       body: JSON.stringify({ "thing":"M5GPS" })
     };
     fetch('http://localhost:5000/estadoagv', requestOptions)
@@ -122,7 +120,6 @@ class prueba1 extends React.Component{
   
     
   componentWillMount(){
-    const miToken = this.props.token;
     //const tokenMontse = "eyJraWQiOiJBSlpUVjNGOEpaS003dVIwcXk4ZFwvaXFvRVQzQlwvQ3VMT1dHaVoxN0U0NlU9IiwiYWxnIjoiUlMyNTYifQ.eyJvcmlnaW5fanRpIjoiMDY2Y2IyODQtZDBjZi00YmFkLTkxZWMtNjA0YjdlZmE3YTBkIiwic3ViIjoiMzlhYTdiOGItM2Y1Yy00NWMyLTljMzItNmU2OTZlOTdmZmJiIiwiYXVkIjoiMWJjcjdrYjRuNWFnYmFwcXNia3RpYWY4aHEiLCJldmVudF9pZCI6ImI0MGQyYTI1LTg5NGQtNGFmNS04MWIwLWNiMzUwNzliOWMyZCIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNjQ0NTMyMjE0LCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtZWFzdC0xLmFtYXpvbmF3cy5jb21cL3VzLWVhc3QtMV9RTVh0M3ZDN3EiLCJjb2duaXRvOnVzZXJuYW1lIjoiMTAxMDg0MDYiLCJleHAiOjE2NDQ1MzU4MTQsImlhdCI6MTY0NDUzMjIxNCwianRpIjoiYmIwZWQ1YzAtN2U1Yi00ZTM2LTk0MzItMjk1NDdmMzgyYWYyIn0.shwkj4xh5CE98PpTcvAYj6Xjq6Nd2mOwp6ns0e1cqVcrrGiPLLkTYTAoezHEPHkIOjkItcn27pJmNr3kKjixKAVBRKRS8g6u1KdfHLUIp4gMxKbU0XGd1id5pUmos7GN4eeqbVvHqye1XBHnhupqMPDmfr8vGp7ktnPmcL9gi0-99ZoxreQcq13qGFtAHYDbDkppFw0E1ijLU_bzKiv15b3wOLm4AQ14nxhrW1EtUsH081OFJ9UuTHW0bP61WEiP3kN7kOA8yEF97T9S6ksT5Gd_ayYWOuGsvkqCI1VbBxnE_3DG1MaY9AyNvI4ke6zmvlsLnlS-DGAn6Xkr0oCUzQ";
     //var ultimoTime = 0;
     
@@ -130,7 +127,7 @@ class prueba1 extends React.Component{
 
     setInterval(() => {
       //console.log(miToken);
-      this.pedirDatos(miToken)
+      this.pedirDatos()
       console.log('state x1: ', this.state.x1, 'state y1: ', this.state.y1)
     }, 500);
     //this.actualizarValoresAG(miToken, ultimoTime);
@@ -166,22 +163,3 @@ class prueba1 extends React.Component{
 }
 
 export default prueba1;
-
-export async function getServerSideProps({req}) {
-  const {Auth,API} = withSSRContext({req});
-  try{
-      const user = await Auth.currentAuthenticatedUser();
-      
-      return{
-          props:{
-              authenticated: true,
-              user: user.username,
-              token: user.signInUserSession.idToken.jwtToken
-          }
-      }
-  }catch(err){
-      return{
-          props:{authenticated: false}
-      }
-  }
-}

@@ -9,7 +9,7 @@ import MoldexLogoVertival from '../image/SVG/moldex-color.svg';
 import {VscLoading} from 'react-icons/vsc';
 import Header from '../components/Header';
 import Swal from 'sweetalert2';
-function login(token) {
+function login() {
     const router = useRouter()
     const [user, setUser] = useState('')
     const [pass, setPass] = useState('')
